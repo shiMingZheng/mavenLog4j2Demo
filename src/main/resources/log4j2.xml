@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Properties>
+        <Property name="baseDir">logs</Property>
+    </Properties>
+
+    <Appenders>
+        <RollingFile name="RollingFile" fileName="${baseDir}/app.log"
+                     filePattern="${baseDir}/$${date:dd日hh时}/app-%d{mm分ss秒}.log.gz">
+            <PatternLayout pattern="%d %p %c{1.} [%t] %m%n" />
+            <!--<CronTriggeringPolicy schedule="* * * * * ?"/>-->
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!--<SizeBasedTriggeringPolicy size="2 kB"/>-->
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${baseDir}" maxDepth="2">
+                    <IfFileName glob="*/app-*.log.gz" />
+                    <IfLastModified age="5s" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="all">
+            <AppenderRef ref="RollingFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
+

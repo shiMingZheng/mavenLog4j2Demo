@@ -1,0 +1,3 @@
+2018-11-29 11:54:52,246 INFO d.Demo [main] info level
+2018-11-29 11:54:52,256 WARN d.Demo [main] warn level
+2018-11-29 11:54:52,256 ERROR d.Demo [main] error level
